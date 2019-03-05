@@ -21,9 +21,15 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        setSupportActionBar(toolbar)
+         setContentView(R.layout.activity_main)
+         setSupportActionBar(toolbar)
 
+        if (savedInstanceState==null)
+        {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.frameLayout_home,HomeFragment())
+                .commit()
+        }
 
         //if you want is NavigationDrawer open RTL
        //  window.decorView.layoutDirection =View.LAYOUT_DIRECTION_RTL
@@ -59,11 +65,15 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         {
             R.id.nav_main ->
             {
-                // Handle the camera action
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.frameLayout_home,HomeFragment())
+                    .commitNow()
             }
             R.id.nav_aboutme ->
             {
-
+               supportFragmentManager.beginTransaction()
+                   .replace(R.id.frameLayout_home,AboutFragment())
+                   .commitNow()
             }
             R.id.nav_send_message ->
             {  //Send Message to Email mbasuony83@gmail.com
@@ -72,6 +82,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
             R.id.nav_share ->
             {
+                //share App
                 val send=Intent()
                 send.action=Intent.ACTION_SEND
                 send.putExtra(Intent.EXTRA_TEXT,"https://github.com/Eng-MahmoudBasuony/Learn-C-Plus-Plus Show me your github ")
