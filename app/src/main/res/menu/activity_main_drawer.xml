@@ -4,26 +4,30 @@
       tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
+
         <item
                 android:id="@+id/nav_main"
                 android:icon="@drawable/ic_home_black_24dp"
                 android:title="Main"/>
         <item
-                android:id="@+id/nav_gallery"
-                android:icon="@drawable/ic_menu_gallery"
-                android:title="Gallery"/>
+                android:id="@+id/nav_aboutme"
+                android:icon="@drawable/ic_account_circle_black_24dp"
+                android:title="About Developer"/>
+
+
         <item
-                android:id="@+id/nav_slideshow"
-                android:icon="@drawable/ic_menu_slideshow"
-                android:title="Slideshow"/>
-        <item
-                android:id="@+id/nav_manage"
-                android:icon="@drawable/ic_menu_manage"
-                android:title="Tools"/>
+          android:id="@+id/nav_send_message"
+          android:icon="@drawable/ic_send_black_24dp"
+          android:title="@string/feedback"
+        />
+
+
+
         <item
                 android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
+                android:icon="@drawable/ic_share_black_24dp"
                 android:title="Share"/>
+
     </group>
 
 
