@@ -66,13 +66,17 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
             }
             R.id.nav_send_message ->
-            {  //Send Message to Email
+            {  //Send Message to Email mbasuony83@gmail.com
                startActivity(Intent(Intent.ACTION_VIEW,
                                     Uri.parse("mailto:"+"mbasuony83@gmail.com"+"?subject="+"Message From App Learn C++")))
             }
             R.id.nav_share ->
             {
-
+                val send=Intent()
+                send.action=Intent.ACTION_SEND
+                send.putExtra(Intent.EXTRA_TEXT,"https://github.com/Eng-MahmoudBasuony/Learn-C-Plus-Plus Show me your github ")
+                send.type="text/plain"
+                startActivity(Intent.createChooser(send,"Choose app"))
             }
 
         }
