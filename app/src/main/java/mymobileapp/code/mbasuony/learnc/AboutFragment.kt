@@ -1,11 +1,14 @@
 package mymobileapp.code.mbasuony.learnc
 
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import kotlinx.android.synthetic.main.fragment_about.*
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -25,6 +28,26 @@ class AboutFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_about, container, false)
+    }
+
+
+    override fun onActivityCreated(savedInstanceState: Bundle?)
+    {
+        super.onActivityCreated(savedInstanceState)
+
+        emailAboutFragment.setOnClickListener {
+
+            startActivity(Intent(Intent.ACTION_VIEW,
+                          Uri.parse("mailto:"+"mbasuony83@gmail.com"+"?subject="+"Message From App Learn C++")))
+        }
+
+        facebookAboutFragment.setOnClickListener {
+
+            startActivity(Intent(Intent.ACTION_VIEW,
+                                 Uri.parse("https://www.facebook.com/EMBasuony")))
+
+        }
+
     }
 
 
