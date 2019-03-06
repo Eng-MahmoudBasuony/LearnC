@@ -9,24 +9,28 @@
                 android:id="@+id/nav_main"
                 android:icon="@drawable/ic_home_black_24dp"
                 android:title="Main"/>
+
+        <item
+                android:id="@+id/nav_send_message"
+                android:icon="@drawable/ic_send_black_24dp"
+                android:title="@string/feedback"
+        />
+
         <item
                 android:id="@+id/nav_aboutme"
                 android:icon="@drawable/ic_account_circle_black_24dp"
                 android:title="About Developer"/>
 
-
-        <item
-          android:id="@+id/nav_send_message"
-          android:icon="@drawable/ic_send_black_24dp"
-          android:title="@string/feedback"
-        />
-
-
-
         <item
                 android:id="@+id/nav_share"
                 android:icon="@drawable/ic_share_black_24dp"
                 android:title="Share"/>
+
+        <item
+            android:id="@+id/nav_close"
+            android:icon="@drawable/ic_close_black_24dp"
+            android:title="Close App"
+        />
 
     </group>
 

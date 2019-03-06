@@ -1,4 +1,4 @@
-package mymobileapp.code.mbasuony.learnc
+package mymobileapp.code.mbasuony.learnc.fragment
 
 
 import android.content.Intent
@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_about.*
+import mymobileapp.code.mbasuony.learnc.R
 
 
 // TODO: Rename parameter arguments, choose names that match

@@ -3,17 +3,15 @@ package mymobileapp.code.mbasuony.learnc
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
-import android.view.Menu
 import android.view.MenuItem
-import android.view.View
-import android.view.Window
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
+import mymobileapp.code.mbasuony.learnc.fragment.AboutFragment
+import mymobileapp.code.mbasuony.learnc.fragment.HomeFragment
 
 class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener
 {
@@ -27,7 +25,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         if (savedInstanceState==null)
         {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.frameLayout_home,HomeFragment())
+                .replace(R.id.frameLayout_home, HomeFragment())
                 .commit()
         }
 
@@ -66,13 +64,13 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_main ->
             {
                 supportFragmentManager.beginTransaction()
-                    .replace(R.id.frameLayout_home,HomeFragment())
+                    .replace(R.id.frameLayout_home, HomeFragment())
                     .commitNow()
             }
             R.id.nav_aboutme ->
             {
                supportFragmentManager.beginTransaction()
-                   .replace(R.id.frameLayout_home,AboutFragment())
+                   .replace(R.id.frameLayout_home, AboutFragment())
                    .commitNow()
             }
             R.id.nav_send_message ->
@@ -88,6 +86,11 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 send.putExtra(Intent.EXTRA_TEXT,"https://github.com/Eng-MahmoudBasuony/Learn-C-Plus-Plus Show me your github ")
                 send.type="text/plain"
                 startActivity(Intent.createChooser(send,"Choose app"))
+            }
+
+            R.id.nav_close ->
+            {
+                 finish()
             }
 
         }
