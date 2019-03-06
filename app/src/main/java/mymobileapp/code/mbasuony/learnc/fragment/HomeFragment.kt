@@ -11,6 +11,8 @@ import android.widget.LinearLayout
 import kotlinx.android.synthetic.main.fragment_home.*
 import mymobileapp.code.mbasuony.learnc.R
 import mymobileapp.code.mbasuony.learnc.viewholder.AdabterHome
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -44,5 +46,17 @@ class HomeFragment : Fragment()
         recyclerHomeActivity.adapter=AdabterHome()
 
     }
+
+
+    fun fetchData()
+    {
+        val BASE_URL="http://www.arablancer.org/cplasplas/public/api/"
+
+        val retrofit= Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+    }
+
 
 }

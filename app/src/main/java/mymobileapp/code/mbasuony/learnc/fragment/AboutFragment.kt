@@ -10,6 +10,8 @@ import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_about.*
 import mymobileapp.code.mbasuony.learnc.R
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -50,6 +52,9 @@ class AboutFragment : Fragment() {
         }
 
     }
+
+
+
 
 
 }
