@@ -1,11 +1,13 @@
 package mymobileapp.code.mbasuony.learnc.viewholder
 
+import android.content.Intent
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import kotlinx.android.synthetic.main.row_recycler_home.view.*
+import mymobileapp.code.mbasuony.learnc.LessonActivity
 import mymobileapp.code.mbasuony.learnc.R
 import mymobileapp.code.mbasuony.learnc.model.Data
 
@@ -40,6 +42,15 @@ class AdabterHome(var allData : ArrayList<Data>) : RecyclerView.Adapter<AdabterH
         {
           val nameLesson=itemView.textTitle as TextView  //Create Object textTitle
               nameLesson.text=data.index_name
+
+          itemView.setOnClickListener(
+              {
+                  val intent=Intent(itemView.context,LessonActivity::class.java)
+                            intent.putExtra("Image_Lesson",data.image_url)
+                            intent.putExtra("Titel_Lession",data.index_name)
+                            intent.putExtra("Content_Lesson",data.lesson)
+                  itemView.context.startActivity(intent)
+              })
 
         }
 
