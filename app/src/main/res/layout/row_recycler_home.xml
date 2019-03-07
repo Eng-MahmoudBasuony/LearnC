@@ -3,32 +3,32 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+       >
 
     <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/cardView"
-
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_margin="5dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp">
+
+    >
 
 
         <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="horizontal"
         >
 
             <ImageView
                     android:id="@+id/imageBookRow"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
+                    android:layout_width="57dp"
+                    android:layout_height="54dp"
                     app:srcCompat="@drawable/notebook"
                     android:layout_margin="5dp"
             />

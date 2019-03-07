@@ -4,9 +4,12 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import kotlinx.android.synthetic.main.row_recycler_home.view.*
 import mymobileapp.code.mbasuony.learnc.R
+import mymobileapp.code.mbasuony.learnc.model.Data
 
-class AdabterHome() : RecyclerView.Adapter<AdabterHome.ViewHolderIndex>()
+class AdabterHome(var allData : ArrayList<Data>) : RecyclerView.Adapter<AdabterHome.ViewHolderIndex>()
 {
 
 
@@ -19,18 +22,26 @@ class AdabterHome() : RecyclerView.Adapter<AdabterHome.ViewHolderIndex>()
 
     override fun getItemCount(): Int  //Return Number Item in RecyclerView
     {
-         return 9
+         return allData.size
     }
 
-    override fun onBindViewHolder(p0: AdabterHome.ViewHolderIndex, p1: Int)
+    override fun onBindViewHolder(viewHolder: AdabterHome.ViewHolderIndex, postion1: Int)
     {
+       var item=allData[postion1]
 
+        viewHolder.bind(item)
     }
 
 
 
     class ViewHolderIndex(itemView: View) : RecyclerView.ViewHolder(itemView)
     {
+        fun bind(data: Data)
+        {
+          val nameLesson=itemView.textTitle as TextView  //Create Object textTitle
+              nameLesson.text=data.index_name
+
+        }
 
     }
 

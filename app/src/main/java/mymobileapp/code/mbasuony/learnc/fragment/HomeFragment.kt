@@ -4,13 +4,20 @@ package mymobileapp.code.mbasuony.learnc.fragment
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_home.*
 import mymobileapp.code.mbasuony.learnc.R
+import mymobileapp.code.mbasuony.learnc.model.Data
+import mymobileapp.code.mbasuony.learnc.network.ApiRetrofit
 import mymobileapp.code.mbasuony.learnc.viewholder.AdabterHome
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -41,9 +48,9 @@ class HomeFragment : Fragment()
     {
         super.onActivityCreated(savedInstanceState)
 
-
+        fetchData()
         recyclerHomeActivity.layoutManager=LinearLayoutManager(this.context,LinearLayout.VERTICAL,false)
-        recyclerHomeActivity.adapter=AdabterHome()
+
 
     }
 
@@ -51,11 +58,38 @@ class HomeFragment : Fragment()
     fun fetchData()
     {
         val BASE_URL="http://www.arablancer.org/cplasplas/public/api/"
-
+        //Configuration for Retrofit
         val retrofit= Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
+
+        //Configuration for Call
+        val apiRetrofit:ApiRetrofit=retrofit.create(ApiRetrofit::class.java)
+        val call=apiRetrofit.getData()
+
+        var item=call.enqueue(object :Callback<ArrayList<Data>>
+                                     {
+                                         override fun onFailure(call: Call<ArrayList<Data>>, t: Throwable)
+                                         {
+                                               Toast.makeText(activity,"Failed to make API call",Toast.LENGTH_LONG).show()
+                                               Log.e("Call onFailure",""+t.message)
+                                         }
+                                         override fun onResponse( call: Call<ArrayList<Data>>,response: Response<ArrayList<Data>>)
+                                         {
+                                                      // response.body()[0] ---> Fetch First Json Object
+                                                     //  response.body()[0].index_name ---> Fetch First Json Object and Fetch Value for index_name
+
+                                             var allData : ArrayList<Data>? = response.body() //get All Data return ArrayList<Data>
+                                              // allData.get(0).index_name ---> Fetch First Json Object
+
+                                             recyclerHomeActivity.adapter=AdabterHome(allData!!)
+
+                                         }
+
+                                     })
+
+
     }
 
 
