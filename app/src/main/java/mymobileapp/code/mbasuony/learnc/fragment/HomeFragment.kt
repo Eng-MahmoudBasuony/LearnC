@@ -52,6 +52,7 @@ class HomeFragment : Fragment()
         recyclerHomeActivity.layoutManager=LinearLayoutManager(this.context,LinearLayout.VERTICAL,false)
 
 
+
     }
 
 
@@ -88,9 +89,8 @@ class HomeFragment : Fragment()
                                          }
 
                                      })
-
-
     }
+
 
 
 }
