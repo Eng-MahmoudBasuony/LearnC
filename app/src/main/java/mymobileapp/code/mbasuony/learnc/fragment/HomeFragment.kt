@@ -4,17 +4,21 @@ package mymobileapp.code.mbasuony.learnc.fragment
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.Toast
+import io.realm.Realm
+import io.realm.RealmConfiguration
 import kotlinx.android.synthetic.main.fragment_home.*
 import mymobileapp.code.mbasuony.learnc.R
 import mymobileapp.code.mbasuony.learnc.model.Data
 import mymobileapp.code.mbasuony.learnc.network.ApiRetrofit
 import mymobileapp.code.mbasuony.learnc.adabter.AdabterHome
+import mymobileapp.code.mbasuony.learnc.database.DataBase
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -48,10 +52,13 @@ class HomeFragment : Fragment()
     {
         super.onActivityCreated(savedInstanceState)
 
+         //Initialize Realm
+         Realm.init(activity)
+
+        recyclerHomeActivity.adapter=AdabterHome()
+        //Get Data From Api
         fetchData()
-        recyclerHomeActivity.layoutManager=LinearLayoutManager(this.context,LinearLayout.VERTICAL,false)
-
-
+        recyclerHomeActivity.layoutManager= LinearLayoutManager(this.context,LinearLayout.VERTICAL,false) as RecyclerView.LayoutManager?
 
     }
 
@@ -75,16 +82,35 @@ class HomeFragment : Fragment()
                                          {
                                                Toast.makeText(activity,"Failed to make API call",Toast.LENGTH_LONG).show()
                                                Log.e("Call onFailure",""+t.message)
+
                                          }
                                          override fun onResponse( call: Call<ArrayList<Data>>,response: Response<ArrayList<Data>>)
                                          {
+                                             //Configuration for realm
+                                             var config=RealmConfiguration.Builder()
+                                                 .name("cpluss.realm")//File Name for Storage
+                                                 .build()
+                                              var realm=Realm.getInstance(config)
+
                                                       // response.body()[0] ---> Fetch First Json Object
                                                      //  response.body()[0].index_name ---> Fetch First Json Object and Fetch Value for index_name
-
                                              var allData : ArrayList<Data>? = response.body() //get All Data return ArrayList<Data>
                                               // allData.get(0).index_name ---> Fetch First Json Object
 
-                                             recyclerHomeActivity.adapter=AdabterHome(allData!!)
+                                             /// Persist your data in a transaction
+                                             realm.executeTransaction {
+                                                 //Storage Data into Realm DB
+                                                 for (i in allData!!)
+                                                 {
+                                                     val lesson =realm.createObject(DataBase::class.java, i.id)
+                                                     lesson.index_name=i.index_name
+                                                     lesson.image_url=i.image_url
+                                                     lesson.lesson=i.lesson
+
+                                                 }
+                                             }
+
+                                             recyclerHomeActivity.adapter=AdabterHome()
 
                                          }
 

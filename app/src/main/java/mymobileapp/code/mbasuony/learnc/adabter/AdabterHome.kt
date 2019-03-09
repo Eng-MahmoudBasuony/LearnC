@@ -1,18 +1,30 @@
 package mymobileapp.code.mbasuony.learnc.adabter
 
 import android.content.Intent
+import android.provider.ContactsContract
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import io.realm.Realm
+import io.realm.RealmConfiguration
 import kotlinx.android.synthetic.main.row_recycler_home.view.*
 import mymobileapp.code.mbasuony.learnc.LessonActivity
 import mymobileapp.code.mbasuony.learnc.R
+import mymobileapp.code.mbasuony.learnc.database.DataBase
 import mymobileapp.code.mbasuony.learnc.model.Data
 
-class AdabterHome(var allData : ArrayList<Data>) : RecyclerView.Adapter<AdabterHome.ViewHolderIndex>()
+class AdabterHome() : RecyclerView.Adapter<AdabterHome.ViewHolderIndex>()
 {
+
+    //Configuration for realm
+    var config= RealmConfiguration.Builder()
+        .name("cpluss.realm")//File Name for Storage
+        .build()
+    var realm= Realm.getInstance(config)
+
+    val allData=realm.where(DataBase::class.java).findAll() //get All Data From Realm DB into data -- return Object From Class DataBase
 
 
     override fun onCreateViewHolder(viewGroup : ViewGroup, p1: Int): AdabterHome.ViewHolderIndex
@@ -31,14 +43,14 @@ class AdabterHome(var allData : ArrayList<Data>) : RecyclerView.Adapter<AdabterH
     {
        var item=allData[postion1]
 
-        viewHolder.bind(item)
+        viewHolder.bind(item!!)
     }
 
 
 
     class ViewHolderIndex(itemView: View) : RecyclerView.ViewHolder(itemView)
     {
-        fun bind(data: Data)
+        fun bind(data: DataBase)
         {
           val nameLesson=itemView.textTitle as TextView  //Create Object textTitle
               nameLesson.text=data.index_name
