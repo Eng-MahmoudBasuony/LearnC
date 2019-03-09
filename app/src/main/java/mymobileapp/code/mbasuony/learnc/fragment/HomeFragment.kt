@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.fragment_home.*
 import mymobileapp.code.mbasuony.learnc.R
 import mymobileapp.code.mbasuony.learnc.model.Data
 import mymobileapp.code.mbasuony.learnc.network.ApiRetrofit
-import mymobileapp.code.mbasuony.learnc.viewholder.AdabterHome
+import mymobileapp.code.mbasuony.learnc.adabter.AdabterHome
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

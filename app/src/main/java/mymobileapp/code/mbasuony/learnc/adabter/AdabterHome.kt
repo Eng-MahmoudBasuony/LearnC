@@ -1,4 +1,4 @@
-package mymobileapp.code.mbasuony.learnc.viewholder
+package mymobileapp.code.mbasuony.learnc.adabter
 
 import android.content.Intent
 import android.support.v7.widget.RecyclerView
