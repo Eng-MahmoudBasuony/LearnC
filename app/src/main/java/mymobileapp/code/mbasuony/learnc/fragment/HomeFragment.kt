@@ -97,6 +97,9 @@ class HomeFragment : Fragment()
                                              var allData : ArrayList<Data>? = response.body() //get All Data return ArrayList<Data>
                                               // allData.get(0).index_name ---> Fetch First Json Object
 
+                                              //Check Data not Exist in Realm
+                                              if (realm.where(DataBase::class.java).findAll().isEmpty())
+                                              {
                                              /// Persist your data in a transaction
                                              realm.executeTransaction {
                                                  //Storage Data into Realm DB
@@ -106,8 +109,27 @@ class HomeFragment : Fragment()
                                                      lesson.index_name=i.index_name
                                                      lesson.image_url=i.image_url
                                                      lesson.lesson=i.lesson
-
                                                  }
+                                             }
+                                            }
+
+                                             //Check Do Data Updated
+                                             if (realm.where(DataBase::class.java).findAll().size!= allData!!.size)
+                                             {
+
+                                                 /// Persist your data in a transaction
+                                                 realm.executeTransaction {
+                                                     realm.deleteAll() //First remove old DB
+                                                     //Storage Data into Realm DB
+                                                     for (i in allData!!)
+                                                     {
+                                                         val lesson =realm.createObject(DataBase::class.java, i.id)
+                                                         lesson.index_name=i.index_name
+                                                         lesson.image_url=i.image_url
+                                                         lesson.lesson=i.lesson
+                                                     }
+                                                 }
+
                                              }
 
                                              recyclerHomeActivity.adapter=AdabterHome()
